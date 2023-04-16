@@ -5,7 +5,7 @@ kernel = sk.create_kernel()
 
 # Prepare OpenAI backend using credentials stored in the `.env` file
 api_key, org_id = sk.openai_settings_from_dot_env()
-kernel.config.add_text_backend("dv", OpenAITextCompletion("text-curie-001", api_key, org_id))
+kernel.config.add_text_backend("dv", OpenAITextCompletion("text-davinci-003", api_key, org_id))
 
 
 # Wrap your prompt in a function
@@ -36,13 +36,13 @@ summarize = kernel.create_semantic_function(prompt, max_tokens=2000, temperature
 # note: using skills from the samples folder
 skills_directory = "samples/skills"
 
-funFunctions = kernel.import_semantic_skill_from_directory(skills_directory, "FunSkill")
-FunFunction = funFunctions["Joke"]
-result = FunFunction("A Neapolitan nerd walks into a bar")
-print(result)
+#funFunctions = kernel.import_semantic_skill_from_directory(skills_directory, "FunSkill")
+#FunFunction = funFunctions["Joke"]
+#result = FunFunction("A Neapolitan nerd walks into a bar")
+#print(result)
 
 analyticFunctions = kernel.import_semantic_skill_from_directory(skills_directory, "AnalyticSkill")
 AnomalyFunction = analyticFunctions["FindTimelineAnomalies"]
-result = AnomalyFunction("Good morning to you")
+result = AnomalyFunction("{start = '1/1/2023', end = '1/30/2023', data {2976,2992,2160,2144,2524,3088,2000,2508,2184,3040,2080,2580,2564,3152,2656,3040,2016,2256,2028,2064,2736,2856,2804,3196,2992,2072,2464,2520,2620,3675}}")
 
 print(result)
